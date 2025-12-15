@@ -7,9 +7,9 @@ class Simulation:
     Represents a single Simulation with multiple Cycles. One Cycle can be seen as one day.
     Handles everything regarding the Simulation
     """
-    id_counter = 0
+    id_counter: int = 0
 
-    def __init__(self, start_participants: int = 9999, max_cycles: int = 10, distribution: list[int] = None):
+    def __init__(self, start_participants: int = 9999, max_cycles: int = 10, distribution: list[int] = None) -> None:
         """
         Initializes a Simulation instance.
 
@@ -25,18 +25,18 @@ class Simulation:
                 current_cycle (int): Index of the currently processed simulation cycle.
                 current_participants (int): Current number of living creatures.
         """
-        self.id = f"{Simulation.id_counter:06d}"
+        self.id: str = f"{Simulation.id_counter:06d}"
         Simulation.id_counter += 1
 
-        self.max_cycles = max_cycles
-        self.start_participants = start_participants - (start_participants % 3)
+        self.max_cycles: int = max_cycles
+        self.start_participants: int = start_participants - (start_participants % 3)
 
-        self.current_cycle = 0
-        self.current_participants = self.start_participants
+        self.current_cycle: int = 0
+        self.current_participants: int = self.start_participants
 
         if distribution is None:
             per_strategy = self.start_participants // 3
-            self.distribution = [per_strategy] * 3
+            self.distribution: list[int] = [per_strategy] * 3
         else:
             if len(distribution) != 3:
                 raise ValueError("Distribution must have exactly 3 int values, representing the amount of (R, P, S).")
@@ -47,15 +47,15 @@ class Simulation:
                     f"Sum of distribution ({sum(distribution)}) must equal total participants "
                     f"({self.start_participants}, rounded down to nearest multiple of 3)."
                 )
-            self.distribution = distribution
+            self.distribution: list[int] = distribution
 
-        self.creatures = []
-        self.strategies = ["R", "P", "S"]
+        self.creatures: list[Creature] = []
+        self.strategies: list[str] = ["R", "P", "S"]
         for strategy, count in zip(self.strategies, self.distribution):
             for _ in range(count):
                 self.creatures.append(Creature(strategy=strategy))
 
-    def next_cycle(self):
+    def next_cycle(self) -> None:
         """
         Executes a single simulation cycle (one day).
 
@@ -88,9 +88,9 @@ class Simulation:
                 offspring_list (list[Creature]): Accumulates all offspring generated
                     during the reproduction phase and becomes the new population.
         """
-        creature_pool = self.creatures[:]
-        already_played = []
-        offspring_list = []
+        creature_pool: list[Creature] = self.creatures[:]
+        already_played: list[Creature] = []
+        offspring_list: list[Creature] = []
 
         random.shuffle(creature_pool)
 
@@ -114,7 +114,7 @@ class Simulation:
         self.current_participants = len(self.creatures)
         self.current_cycle += 1
 
-    def info(self) -> dict:
+    def info(self) -> dict[str, object]:
         """
         Returns a snapshot of the current simulation state.
 

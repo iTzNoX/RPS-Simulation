@@ -1,11 +1,13 @@
+from typing import List, Dict
+
 class Creature:
     """
     Represents a single creature in the simulation.
     Handles everything regarding the Creatures
     """
-    id_counter = 0
+    id_counter: int = 0
 
-    def __init__(self, strategy: str, generation: int = 1):
+    def __init__(self, strategy: str, generation: int = 1) -> None:
         """
         Initializes a Creature instance.
 
@@ -15,16 +17,16 @@ class Creature:
             food_amount (int): the current amount of food the creatues owns. Needed for reproduction.
             generation (int): current generation of the creature.
         """
-        self.id = f"{Creature.id_counter:06d}"
+        self.id: str = f"{Creature.id_counter:06d}"
         Creature.id_counter += 1
 
-        self.food_amount = 0
-        self.generation = generation
+        self.food_amount: int = 0
+        self.generation: int = generation
         if strategy not in {"R", "P", "S"}:
             raise ValueError("Strategy must be 'R', 'P', or 'S'.")
-        self.strategy = strategy
+        self.strategy: str = strategy
 
-    def play(self, opponent) -> str:
+    def play(self, opponent: "Creature") -> str:
         """
         Plays one round against another creature.
 
@@ -48,7 +50,7 @@ class Creature:
             opponent.food_amount += 2
             return "lose"
 
-    def reproduce(self):
+    def reproduce(self) -> list["Creature"]:
         """
         Generates offspring based on current food_amount.
         Each food unit produces one child with the same strategy.
@@ -65,7 +67,7 @@ class Creature:
         self.food_amount = 0
         return offspring
 
-    def info(self) -> dict:
+    def info(self) -> dict[str, str | int]:
         """
         Returns a snapshot of the creature's current state.
 
