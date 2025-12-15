@@ -93,7 +93,7 @@ class Simulation:
                   and info of 3 random sample creatures.
         """
 
-        total_creatures = len(self.creatures)
+        total_creatures = self.current_participants
         strategy_counts = Counter(c.strategy for c in self.creatures)
 
         sample_creatures = random.sample(self.creatures, k=min(3, total_creatures))
