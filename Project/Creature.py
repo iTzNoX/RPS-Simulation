@@ -44,15 +44,12 @@ class Creature:
             str: 'win', 'lose', or 'draw' depending on the result.
         """
         rules = {"S": "P", "P": "R", "R": "S"}
-        #draw
         if self.strategy == opponent.strategy:
             self.food_amount += 1
             return "draw"
-        #win
         elif rules[self.strategy] == opponent.strategy:
             self.food_amount += 2
             return "win"
-        #lose
         else:
             return "lose"
 
