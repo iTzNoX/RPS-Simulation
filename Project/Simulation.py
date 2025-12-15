@@ -1,4 +1,6 @@
 from Creature import Creature
+from collections import Counter
+import random
 
 class Simulation:
     """
@@ -89,3 +91,26 @@ class Simulation:
         self.current_cycle += 1
 
         print(self.info())
+
+    def info(self) -> dict:
+        """
+        Returns a snapshot of the current simulation state.
+
+        Returns:
+            dict: Contains current cycle, total creatures, strategy counts,
+                  and info of 3 random sample creatures.
+        """
+
+        total_creatures = len(self.creatures)
+        strategy_counts = Counter(c.strategy for c in self.creatures)
+
+        sample_creatures = random.sample(self.creatures, k=min(3, total_creatures))
+        sample_info = [c.info() for c in sample_creatures]
+
+        return {
+            "current_cycle": self.current_cycle,
+            "total_creatures": total_creatures,
+            "strategy_counts": dict(strategy_counts),
+            "sample_creatures": sample_info
+        }
+
