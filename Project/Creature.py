@@ -34,15 +34,18 @@ class Creature:
             str: 'win', 'lose', or 'draw' depending on the result.
         """
         if self.strategy == opponent.strategy:
-            self.food_amount += 2
+            self.food_amount += 1
+            opponent.food_amount += 1
             return "draw"
         elif (self.strategy == "R" and opponent.strategy == "S") or \
              (self.strategy == "S" and opponent.strategy == "P") or \
              (self.strategy == "P" and opponent.strategy == "R"):
-            self.food_amount += 4
+            self.food_amount += 2
+            opponent.food_amount += 0
             return "win"
         else:
             self.food_amount += 0
+            opponent.food_amount += 2
             return "lose"
 
     def reproduce(self):
@@ -59,6 +62,7 @@ class Creature:
             child = Creature(strategy = self.strategy,
                              generation=self.generation+1)
             offspring.append(child)
+        self.food_amount = 0
         return offspring
 
     def info(self) -> dict:
