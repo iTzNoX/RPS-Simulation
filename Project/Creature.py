@@ -33,14 +33,16 @@ class Creature:
         Returns:
             str: 'win', 'lose', or 'draw' depending on the result.
         """
-        rules = {"S": "P", "P": "R", "R": "S"}
         if self.strategy == opponent.strategy:
-            self.food_amount += 1
-            return "draw"
-        elif rules[self.strategy] == opponent.strategy:
             self.food_amount += 2
+            return "draw"
+        elif (self.strategy == "R" and opponent.strategy == "S") or \
+             (self.strategy == "S" and opponent.strategy == "P") or \
+             (self.strategy == "P" and opponent.strategy == "R"):
+            self.food_amount += 4
             return "win"
         else:
+            self.food_amount += 0
             return "lose"
 
     def reproduce(self):
