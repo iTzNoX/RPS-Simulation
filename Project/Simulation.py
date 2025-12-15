@@ -55,7 +55,38 @@ class Simulation:
                 self.creatures.append(Creature(strategy=strategy))
 
     def next_cycle(self):
+        """
+        Executes a single simulation cycle (one day).
 
+        In each cycle, all currently living creatures are randomly paired and play
+        exactly one round of Rock-Paper-Scissors. Each creature gains food based on
+        the outcome of its match
+
+        After all matches are completed, every creature reproduces. The number of
+        offspring produced by a creature equals its accumulated food amount.
+        The parent generation is then completely replaced by the offspring
+        generation.
+
+        Notes:
+        - Each creature participates in at most one match per cycle.
+        - No creature survives into the next cycle. Population continuity is
+          achieved solely through reproduction.
+        - The total population size depends entirely on the food-to-offspring
+          conversion rules defined in the Creature class.
+
+        Attributes:
+            runtime state:
+                creatures (list[Creature]): Current population at the beginning of the cycle.
+                current_participants (int): reflects the size of the current population.
+                current_cycle (int): reflects the current cycle for later output in info.
+            Local variables:
+                creature_pool (list[Creature]): Shuffled working copy of the current
+                    population used to form random, non-overlapping match pairs.
+                already_played (list[Creature]): Collection of all creatures that
+                    participated in a match during this cycle and are eligible for reproduction.
+                offspring_list (list[Creature]): Accumulates all offspring generated
+                    during the reproduction phase and becomes the new population.
+        """
         creature_pool = self.creatures[:]
         already_played = []
         offspring_list = []
