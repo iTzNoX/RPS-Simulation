@@ -1,5 +1,3 @@
-
-# Handles the creation and actions of the Creatures
 class Creature:
     id_counter = 0
 
@@ -19,6 +17,8 @@ class Creature:
             raise ValueError("Creature limit reached")
         Creature.id_counter += 1
 
+    def kill(self):
+        self.alive = False
     def play(self, opponent) -> str:
         rules = {"S": "P", "P": "R", "R": "S"}
         #draw
@@ -41,6 +41,3 @@ class Creature:
             offspring.append(child)
         self.kill()
         return offspring
-
-    def kill(self):
-        self.alive = False
