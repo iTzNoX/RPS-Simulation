@@ -1,9 +1,27 @@
 from Creature import Creature
 
 class Simulation:
+    """
+    Represents a single Simulation with multiple Cycles. One Cycle can be seen as one day.
+    Handles everything regarding the Simulation
+    """
     id_counter = 0
 
     def __init__(self, participants: int = 9999, cycles: int = 10, distribution: list[int] = None):
+        """
+        Initializes a Simulation instance.
+
+        Attributes:
+            Configuration:
+                participants (int): Total number of participants (rounded downwards to nearest multiple of 3).
+                cycles (int): Number of simulation cycles to run.
+                distribution (list[int]): Exact number of participants per strategy [R, P, S].
+                strategies (list[str]): Ordered list of available strategies.
+            runtime state:
+                creatures (list[Creature]): List of all Creature objects participating in the simulation.
+                current_cycle (int): Index of the currently processed simulation cycle.
+                current_participants (int): Current number of living creatures.
+        """
         Simulation.increase_id_counter()
         self.id = f"{Simulation.id_counter:06d}"
 
