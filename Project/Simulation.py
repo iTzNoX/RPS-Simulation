@@ -9,13 +9,14 @@ class Simulation:
     """
     id_counter = 0
 
-    def __init__(self, participants: int = 9999, max_cycles: int = 10, distribution: list[int] = None):
+    def __init__(self, start_participants: int = 9999, max_cycles: int = 10, distribution: list[int] = None):
         """
         Initializes a Simulation instance.
 
         Attributes:
             Configuration:
-                participants (int): Total number of participants (rounded downwards to nearest multiple of 3).
+                start_participants (int): Total number of participants at start
+                    (rounded downwards to nearest multiple of 3).
                 max_cycles (int): Number of max simulation cycles to run.
                 distribution (list[int]): Exact number of participants per strategy [R, P, S].
                 strategies (list[str]): Ordered list of available strategies.
@@ -28,23 +29,23 @@ class Simulation:
         Simulation.id_counter += 1
 
         self.max_cycles = max_cycles
-        self.participants = participants - (participants % 3)
+        self.start_participants = start_participants - (start_participants % 3)
 
         self.current_cycle = 0
-        self.current_participants = self.participants
+        self.current_participants = self.start_participants
 
         if distribution is None:
-            per_strategy = self.participants // 3
+            per_strategy = self.start_participants // 3
             self.distribution = [per_strategy] * 3
         else:
             if len(distribution) != 3:
                 raise ValueError("Distribution must have exactly 3 int values, representing the amount of (R, P, S).")
             if not all(isinstance(x, int) and x >= 0 for x in distribution):
                 raise ValueError("Distribution values must be non-negative integers.")
-            if sum(distribution) != self.participants:
+            if sum(distribution) != self.start_participants:
                 raise ValueError(
                     f"Sum of distribution ({sum(distribution)}) must equal total participants "
-                    f"({self.participants}, rounded down to nearest multiple of 3)."
+                    f"({self.start_participants}, rounded down to nearest multiple of 3)."
                 )
             self.distribution = distribution
 
@@ -110,9 +111,7 @@ class Simulation:
 
         self.creatures.clear()
         self.creatures.extend(offspring_list)
-
         self.current_participants = len(self.creatures)
-
         self.current_cycle += 1
 
     def info(self) -> dict:
