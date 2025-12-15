@@ -57,3 +57,35 @@ class Simulation:
         if Simulation.id_counter > 999999:
             raise ValueError("Simulation ID limit reached")
         Simulation.id_counter += 1
+
+    def next_cycle(self):
+
+        creature_pool = self.creatures[:]
+        already_played = []
+        offspring_list = []
+
+        random.shuffle(creature_pool)
+
+        while len(creature_pool) > 1:
+            c1 = creature_pool.pop()
+            c2 = creature_pool.pop()
+            c1.play(c2)
+            already_played.extend([c1, c2])
+
+        if len(creature_pool) == 1:
+            last = creature_pool.pop()
+            last.food_amount += 1
+            already_played.append(last)
+
+        for creature in already_played:
+            offspring = creature.reproduce()
+            offspring_list.extend(offspring)
+
+        self.creatures.clear()
+        self.creatures.extend(offspring_list)
+
+        self.current_participants = len(self.creatures)
+
+        self.current_cycle += 1
+
+        print(self.info())
