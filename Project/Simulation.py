@@ -7,14 +7,14 @@ class Simulation:
     """
     id_counter = 0
 
-    def __init__(self, participants: int = 9999, cycles: int = 10, distribution: list[int] = None):
+    def __init__(self, participants: int = 9999, max_cycles: int = 10, distribution: list[int] = None):
         """
         Initializes a Simulation instance.
 
         Attributes:
             Configuration:
                 participants (int): Total number of participants (rounded downwards to nearest multiple of 3).
-                cycles (int): Number of simulation cycles to run.
+                max_cycles (int): Number of max simulation cycles to run.
                 distribution (list[int]): Exact number of participants per strategy [R, P, S].
                 strategies (list[str]): Ordered list of available strategies.
             runtime state:
@@ -25,7 +25,7 @@ class Simulation:
         Simulation.increase_id_counter()
         self.id = f"{Simulation.id_counter:06d}"
 
-        self.cycles = cycles
+        self.max_cycles = max_cycles
         self.participants = participants - (participants % 3)
 
         self.current_cycle = 0
