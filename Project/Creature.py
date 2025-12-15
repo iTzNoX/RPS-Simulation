@@ -14,20 +14,15 @@ class Creature:
             strategy (str): Has to be R, P or S, representing Rock, Paper or Scissors.
             food_amount (int): the current amount of food the creatues owns. Needed for reproduction.
             generation (int): current generation of the creature.
-            alive (bool): defines if the Creature is currently alive or not.
         """
         self.id = f"{Creature.id_counter:06d}"
         Creature.id_counter += 1
 
         self.food_amount = 0
         self.generation = generation
-        self.alive = True
         if strategy not in {"R", "P", "S"}:
             raise ValueError("Strategy must be 'R', 'P', or 'S'.")
         self.strategy = strategy
-
-    def kill(self):
-        self.alive = False
 
     def play(self, opponent) -> str:
         """
@@ -62,7 +57,6 @@ class Creature:
             child = Creature(strategy = self.strategy,
                              generation=self.generation+1)
             offspring.append(child)
-        self.kill()
         return offspring
 
     def info(self) -> dict:
