@@ -6,10 +6,12 @@ class Creature:
     def __init__(self, strategy: str, generation: int = 1):
         Creature.increase_id_counter()
         self.id = f"{Creature.id_counter:06d}"
-        self.strategy = strategy
         self.food_amount = 0
         self.generation = generation
         self.alive = True
+        if strategy not in {"R", "P", "S"}:
+            raise ValueError("Strategy must be 'R', 'P', or 'S'.")
+        self.strategy = strategy
 
     @staticmethod
     def increase_id_counter():
