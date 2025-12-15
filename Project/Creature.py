@@ -3,12 +3,12 @@
 class Creature:
     id_counter = 0
 
-    def __init__(self, strategy: str):
+    def __init__(self, strategy: str, generation: int = 1):
         Creature.increase_id_counter()
         self.id = f"{Creature.id_counter:06d}"
         self.strategy = strategy
         self.food_amount = 0
-        self.generation = 1
+        self.generation = generation
         self.alive = True
 
     @staticmethod
@@ -35,7 +35,7 @@ class Creature:
         offspring = []
         for _ in range(self.food_amount):
             child = Creature(strategy = self.strategy,
-                             generation = self.generation + 1)
+                             generation=self.generation+1)
             offspring.append(child)
         self.kill()
         return offspring
