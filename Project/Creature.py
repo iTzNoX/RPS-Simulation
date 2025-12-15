@@ -31,5 +31,14 @@ class Creature:
         else:
             return "lose"
 
+    def reproduce(self):
+        offspring = []
+        for _ in range(self.food_amount):
+            child = Creature(strategy = self.strategy,
+                             generation = self.generation + 1)
+            offspring.append(child)
+        self.kill()
+        return offspring
+
     def kill(self):
         self.alive = False
