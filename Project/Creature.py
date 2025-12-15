@@ -16,20 +16,15 @@ class Creature:
             generation (int): current generation of the creature.
             alive (bool): defines if the Creature is currently alive or not.
         """
-        Creature.increase_id_counter()
         self.id = f"{Creature.id_counter:06d}"
+        Creature.id_counter += 1
+
         self.food_amount = 0
         self.generation = generation
         self.alive = True
         if strategy not in {"R", "P", "S"}:
             raise ValueError("Strategy must be 'R', 'P', or 'S'.")
         self.strategy = strategy
-
-    @staticmethod
-    def increase_id_counter():
-        if Creature.id_counter > 999999:
-            raise ValueError("Creature limit reached")
-        Creature.id_counter += 1
 
     def kill(self):
         self.alive = False

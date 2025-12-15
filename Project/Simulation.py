@@ -24,8 +24,8 @@ class Simulation:
                 current_cycle (int): Index of the currently processed simulation cycle.
                 current_participants (int): Current number of living creatures.
         """
-        Simulation.increase_id_counter()
         self.id = f"{Simulation.id_counter:06d}"
+        Simulation.id_counter += 1
 
         self.max_cycles = max_cycles
         self.participants = participants - (participants % 3)
@@ -53,12 +53,6 @@ class Simulation:
         for strategy, count in zip(self.strategies, self.distribution):
             for _ in range(count):
                 self.creatures.append(Creature(strategy=strategy))
-
-    @staticmethod
-    def increase_id_counter():
-        if Simulation.id_counter > 999999:
-            raise ValueError("Simulation ID limit reached")
-        Simulation.id_counter += 1
 
     def next_cycle(self):
 
@@ -89,8 +83,6 @@ class Simulation:
         self.current_participants = len(self.creatures)
 
         self.current_cycle += 1
-
-        print(self.info())
 
     def info(self) -> dict:
         """
