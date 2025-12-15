@@ -16,3 +16,17 @@ class Creature:
         if Creature.id_counter > 999999:
             raise ValueError("Creature limit reached")
         Creature.id_counter += 1
+
+    def play(self, opponent) -> str:
+        rules = {"S": "P", "P": "R", "R": "S"}
+        #draw
+        if self.strategy == opponent.strategy:
+            self.food_amount += 1
+            return "draw"
+        #win
+        elif rules[self.strategy] == opponent.strategy:
+            self.food_amount += 2
+            return "win"
+        #lose
+        else:
+            return "lose"
