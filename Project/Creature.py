@@ -69,3 +69,16 @@ class Creature:
             offspring.append(child)
         self.kill()
         return offspring
+
+    def info(self) -> dict:
+        """
+        Returns a snapshot of the creature's current state.
+
+        Returns:
+            dict: Contains id, strategy and generation.
+        """
+        return {
+            "id": self.id,
+            "strategy": self.strategy,
+            "generation": self.generation,
+        }
