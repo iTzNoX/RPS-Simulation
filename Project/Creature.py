@@ -30,3 +30,6 @@ class Creature:
         #lose
         else:
             return "lose"
+
+    def kill(self):
+        self.alive = False
