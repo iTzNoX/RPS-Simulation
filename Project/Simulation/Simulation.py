@@ -1,4 +1,4 @@
-from Creature import Creature
+from Project.Simulation.Creature import Creature
 from collections import Counter
 import random
 

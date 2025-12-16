@@ -24,7 +24,7 @@ def main():
     - The higher the participants are the longer the cycles will take. it's recommended to stay under 1 Million
       participants.
     """
-    sim = Simulation(start_participants=99999, max_cycles=10)
+    sim = Simulation(start_participants=9999, max_cycles=100)
 
     print("Starting simulation...\n")
 

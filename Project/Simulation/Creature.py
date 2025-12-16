@@ -1,5 +1,3 @@
-from typing import List, Dict
-
 class Creature:
     """
     Represents a single creature in the simulation.
