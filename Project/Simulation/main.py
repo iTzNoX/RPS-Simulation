@@ -1,12 +1,12 @@
-from Simulation import Simulation
+from World import World
 
 def main():
     """
     Main entry point for running the Rock-Paper-Scissors Simulation.
 
-    This script initializes a Simulation instance with a specified number of participants
+    This script initializes a World instance with a specified number of participants
     and maximum cycles. It then runs the simulation day by day (cycle by cycle), printing
-    a structured summary of the simulation state after each cycle, including:
+    a structured summary of the World state after each cycle, including:
 
     - Current cycle index
     - Total number of living creatures
@@ -17,14 +17,14 @@ def main():
     total remaining creatures, and the final strategy counts.
 
     Notes:
-    - The simulation ends either when the maximum number of cycles is reached or when
+    - The World ends either when the maximum number of cycles is reached or when
       there are no more living creatures.
-    - The `Simulation` and `Creature` classes handle all internal mechanics, such as
+    - The `World` and `Creature` classes handle all internal mechanics, such as
       interactions, reproduction, and ID management.
     - The higher the participants are the longer the cycles will take. it's recommended to stay under 1 Million
       participants.
     """
-    sim = Simulation(start_participants=9999, max_cycles=100)
+    sim = World(start_participants=9999, max_cycles=100)
 
     print("Starting simulation...\n")
 

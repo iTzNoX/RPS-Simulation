@@ -2,31 +2,31 @@ from Project.Simulation.Creature import Creature
 from collections import Counter
 import random
 
-class Simulation:
+class World:
     """
-    Represents a single Simulation with multiple Cycles. One Cycle can be seen as one day.
-    Handles everything regarding the Simulation
+    Represents a single World with multiple Cycles. One Cycle can be seen as one day.
+    Handles everything regarding the World
     """
     id_counter: int = 0
 
     def __init__(self, start_participants: int = 9999, max_cycles: int = 10, distribution: list[int] = None) -> None:
         """
-        Initializes a Simulation instance.
+        Initializes a World instance.
 
         Attributes:
             Configuration:
                 start_participants (int): Total number of participants at start
                     (rounded downwards to nearest multiple of 3).
-                max_cycles (int): Number of max simulation cycles to run.
+                max_cycles (int): Number of max World cycles to run.
                 distribution (list[int]): Exact number of participants per strategy [R, P, S].
                 strategies (list[str]): Ordered list of available strategies.
             runtime state:
-                creatures (list[Creature]): List of all Creature objects participating in the simulation.
-                current_cycle (int): Index of the currently processed simulation cycle.
+                creatures (list[Creature]): List of all Creature objects participating in the World.
+                current_cycle (int): Index of the currently processed World cycle.
                 current_participants (int): Current number of living creatures.
         """
-        self.id: str = f"{Simulation.id_counter:06d}"
-        Simulation.id_counter += 1
+        self.id: str = f"{World.id_counter:06d}"
+        World.id_counter += 1
 
         self.max_cycles: int = max_cycles
         self.start_participants: int = start_participants - (start_participants % 3)
@@ -57,7 +57,7 @@ class Simulation:
 
     def next_cycle(self) -> None:
         """
-        Executes a single simulation cycle (one day).
+        Executes a single World cycle (one day).
 
         In each cycle, all currently living creatures are randomly paired and play
         exactly one round of Rock-Paper-Scissors. Each creature gains food based on
@@ -116,7 +116,7 @@ class Simulation:
 
     def info(self) -> dict[str, object]:
         """
-        Returns a snapshot of the current simulation state.
+        Returns a snapshot of the current World state.
 
         Returns:
             dict: Contains current cycle, total creatures, strategy counts,

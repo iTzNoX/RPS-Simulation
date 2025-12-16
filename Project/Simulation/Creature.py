@@ -1,6 +1,6 @@
 class Creature:
     """
-    Represents a single creature in the simulation.
+    Represents a single creature in the World.
     Handles everything regarding the Creatures
     """
     id_counter: int = 0
