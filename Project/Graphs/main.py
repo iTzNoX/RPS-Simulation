@@ -1,4 +1,4 @@
-from World import World
+from Project.Simulation import World
 
 def main():
     """
@@ -24,7 +24,7 @@ def main():
     - The higher the participants are the longer the cycles will take. it's recommended to stay under 1 Million
       participants.
     """
-    sim = World(start_participants=9999, max_cycles=100)
+    sim = World.World(start_participants=9999, max_cycles=100)
 
     print("Starting simulation...\n")
 
